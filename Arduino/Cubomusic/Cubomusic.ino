@@ -12,6 +12,9 @@ int16_t AcXo,AcYo,AcZo;
 
 // Open serial and begin bluetooth
 SoftwareSerial ble(10, 11); // RX, TX
+
+//ble reader
+byte incomingByte = 0;
 void setup() {
   // MPU-6050
   Wire.begin();
@@ -25,6 +28,9 @@ void setup() {
 
   // begin bluetooth serial port communication
   ble.begin(9600);
+
+  //Vibrador
+  pinMode(2, OUTPUT);
 }
 
 // Cube music loop
@@ -40,7 +46,22 @@ void loop(){
   GyX=Wire.read()<<8|Wire.read();  // 0x43 (GYRO_XOUT_H) & 0x44 (GYRO_XOUT_L)
   GyY=Wire.read()<<8|Wire.read();  // 0x45 (GYRO_YOUT_H) & 0x46 (GYRO_YOUT_L)
   GyZ=Wire.read()<<8|Wire.read();  // 0x47 (GYRO_ZOUT_H) & 0x48 (GYRO_ZOUT_L)
-  
+
+  if (ble.available() > 0) {
+      // read the incoming byte:
+      incomingByte = ble.read();
+      Serial.println(incomingByte);
+      if (incomingByte == 10){
+        digitalWrite(2, HIGH);   // turn the motor on (HIGH is the voltage level)
+        delay(500);                       // wait for a second
+        digitalWrite(2, LOW);    // turn the motor off by making the voltage LOW
+        delay(200);
+        digitalWrite(2, HIGH);   // turn the motor on (HIGH is the voltage level)
+        delay(700);                       // wait for a second
+        digitalWrite(2, LOW);    // turn the motor off by making the voltage LOW
+        incomingByte = 0;
+      }
+  }
   //re-scale
   AcX=AcX/2500;
   AcY=AcY/2500;
@@ -48,28 +69,28 @@ void loop(){
   
   //face detect 1,2,...,6
   if (abs(AcX-0)<2  && abs(AcY-0)<2 && abs(AcZ+6)<2) {
-    Serial.println(" hexagono ");
-    ble.write("hexagono");
+    Serial.println(" quadrante ");
+    ble.write("quadrante\n");
   }
   else if (abs(AcX-0)<2  && abs(AcY+6)<2 && abs(AcZ-0)<2) {
-    Serial.println(" circulo ");
-    ble.write("circulo");
+    Serial.println(" triangulo ");
+    ble.write("triangulo\n");
   }
   else if (abs(AcX-0)<2  && abs(AcY-0)<2 && abs(AcZ-6)<2) {
     Serial.println(" estrela ");
-    ble.write("estrela");
+    ble.write("estrela\n");
   }
   else if (abs(AcX-0)<2  && abs(AcY-6)<2 && abs(AcZ-0)<2) {
-    Serial.println(" triangulo ");
-    ble.write("triangulo");
+    Serial.println(" circulo ");
+    ble.write("circulo\n");
   }
   else if (abs(AcX-6)<2  && abs(AcY-0)<2 && abs(AcZ-0)<2) {
-    Serial.println(" quadrado ");
-    ble.write("quadrado");
+    Serial.println(" hexagono ");
+    ble.write("hexagono\n");
   }
   else if (abs(AcX+6)<2  && abs(AcY-0)<2 && abs(AcZ-0)<2) {
-    Serial.println(" quadrante ");
-    ble.write("quadrante");
+    Serial.println(" quadrado ");
+    ble.write("quadrado\n");
   }
 
   //other cases
@@ -77,15 +98,15 @@ void loop(){
     //motion detect X,Y,Z
     if (abs(AcX-AcXo)>2  && abs(AcY-AcYo)<=2 && abs(AcZ-AcZo)<=2) {
       Serial.println(" move-x ");
-      ble.write("movex");
+      ble.write("movex\n");
     }
     else if (abs(AcX-AcXo)<=2  && abs(AcY-AcYo)>2 && abs(AcZ-AcZo)<=2) {
       Serial.println(" move-y ");
-      ble.write("movey");
+      ble.write("movey\n");
     }
     else if (abs(AcX-AcXo)<=2  && abs(AcY-AcYo)<=2 && abs(AcZ-AcZo)>2) {
       Serial.println(" move-z ");
-      ble.write("movez");
+      ble.write("movez\n");
     }
     else {
       Serial.print(" AcX = "); Serial.print(AcX);
