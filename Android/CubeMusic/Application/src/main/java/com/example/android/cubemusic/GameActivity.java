@@ -213,7 +213,7 @@ public class GameActivity extends Activity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                image.setImageResource(R.drawable.ic_launcher);
+                                image.setImageResource(R.drawable.default_image);
                             }
                         });
 
