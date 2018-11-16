@@ -23,7 +23,7 @@ import android.widget.ImageView;
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class GameActivity extends Activity {
+public class TutorialActivity extends Activity {
     ImageView image;
     private BluetoothLeService mBluetoothLeService;
     private String mDeviceName = "CubeMusic";
@@ -102,7 +102,7 @@ public class GameActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_game);
+        setContentView(R.layout.activity_tutorial);
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -127,9 +127,28 @@ public class GameActivity extends Activity {
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
 
         image = (ImageView) findViewById(R.id.imageView);
-        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
-        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
-        registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
+        image.setImageResource(R.drawable.dialogo1);
+
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                image.setImageResource(R.drawable.dialogo1);
+//            }
+//        });
+
+//        try { Thread.sleep(3000); }
+//        catch (InterruptedException ex) { android.util.Log.d("CubeMusic", ex.toString()); }
+        final Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+                registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
+            }
+        },3000);
+
+
 
     }
 
