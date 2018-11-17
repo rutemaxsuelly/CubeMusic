@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -28,6 +29,8 @@ public class TutorialActivity extends Activity {
     private BluetoothLeService mBluetoothLeService;
     private String mDeviceName = "CubeMusic";
     private String mDeviceAddress = "00:15:83:00:CA:B9";
+    private String old_data = "";
+    private MediaPlayer mediaPlayer = new MediaPlayer();
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -129,15 +132,7 @@ public class TutorialActivity extends Activity {
         image = (ImageView) findViewById(R.id.imageView);
         image.setImageResource(R.drawable.dialogo1);
 
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                image.setImageResource(R.drawable.dialogo1);
-//            }
-//        });
-
-//        try { Thread.sleep(3000); }
-//        catch (InterruptedException ex) { android.util.Log.d("CubeMusic", ex.toString()); }
+        //Espera 3s para começar
         final Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
 
         new Handler().postDelayed(new Runnable() {
@@ -147,9 +142,7 @@ public class TutorialActivity extends Activity {
                 registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
             }
         },3000);
-
-
-
+        mediaPlayer.setScreenOnWhilePlaying(true);
     }
 
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -177,66 +170,90 @@ public class TutorialActivity extends Activity {
             final String action = intent.getAction();
             if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
 //                displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
-                String received_data = intent.getStringExtra(BluetoothLeService.EXTRA_DATA);
-                switch (received_data.trim()){
-                    case "triangulo":
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                image.setImageResource(R.drawable.triangulo);
-                            }
-                        });
-                        break;
-                    case "circulo":
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                image.setImageResource(R.drawable.circulo);
-                            }
-                        });
-                        break;
-                    case "quadrado":
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                image.setImageResource(R.drawable.quadrado);
-                            }
-                        });
-                        break;
-                    case "quadrante":
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                image.setImageResource(R.drawable.quadrante);
-                            }
-                        });
-                        break;
-                    case "hexagono":
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                image.setImageResource(R.drawable.hexagono);
-                            }
-                        });
-                        break;
-                    case "estrela":
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                image.setImageResource(R.drawable.estrela);
-                            }
-                        });
-                        break;
-                    default:
-                        Log.d(this.getClass().getName(), received_data);
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                image.setImageResource(R.drawable.default_image);
-                            }
-                        });
+                String received_data = intent.getStringExtra(BluetoothLeService.EXTRA_DATA).trim();
+                if(!(received_data.equals(old_data))) {
+                    switch (received_data) {
+                        case "triangulo":
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    image.setImageResource(R.drawable.triangulo);
+                                }
+                            });
+                            mediaPlayer = MediaPlayer.create(getApplicationContext(),R.raw.c1);
+                            mediaPlayer.start();
+                            mediaPlayer.set
+                            break;
+                        case "circulo":
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    image.setImageResource(R.drawable.circulo);
+                                }
+                            });
+                            break;
+                        case "quadrado":
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    image.setImageResource(R.drawable.quadrado);
+                                }
+                            });
+                            break;
+                        case "quadrante":
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    image.setImageResource(R.drawable.quadrante);
+                                }
+                            });
+                            break;
+                        case "hexagono":
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    image.setImageResource(R.drawable.hexagono);
+                                }
+                            });
+                            break;
+                        case "estrela":
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    image.setImageResource(R.drawable.estrela);
+                                }
+                            });
+                            break;
+                        default:
+                            Log.d(this.getClass().getName(), received_data);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    image.setImageResource(R.drawable.default_image);
+                                }
+                            });
 
+                    }
+                    old_data = received_data;
                 }
+            }else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        image.setImageResource(R.drawable.erro);
+                    }
+                });
+                //Espera 3s para começar
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent i = getBaseContext().getPackageManager().
+                                getLaunchIntentForPackage(getBaseContext().getPackageName());
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(i);
+                    }
+                },5000);
             }
         }
     };
