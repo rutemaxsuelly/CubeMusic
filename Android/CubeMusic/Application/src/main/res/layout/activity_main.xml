@@ -10,33 +10,37 @@
         android:id="@+id/button"
         android:layout_width="130dp"
         android:layout_height="95dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginBottom="249dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="380dp"
+        android:layout_marginBottom="180dp"
         android:background="@drawable/inicio2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/jogar"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/tutorial"
         android:layout_width="130dp"
         android:layout_height="95dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="249dp"
+        android:layout_marginTop="390dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="180dp"
         android:background="@drawable/inicio3"
         android:onClick="goToTutorial"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/jogar" />
+        app:layout_constraintStart_toEndOf="@+id/jogar"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/jogar"
         android:layout_width="120dp"
         android:layout_height="150dp"
         android:layout_marginStart="150dp"
-        android:layout_marginTop="129dp"
+        android:layout_marginTop="300dp"
         android:layout_marginEnd="150dp"
-        android:layout_marginBottom="225dp"
+        android:layout_marginBottom="80dp"
         android:background="@drawable/inicio1"
         android:onClick="goToGame"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -44,5 +48,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="92dp"
+        android:layout_marginBottom="33dp"
+        android:src="@drawable/logo"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/jogar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
