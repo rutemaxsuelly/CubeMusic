@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,17 +21,20 @@ import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
 import android.widget.ImageView;
 
+import java.io.FileDescriptor;
+import java.io.IOException;
+
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
 public class TutorialActivity extends Activity {
-    ImageView image;
+    private ImageView image;
     private BluetoothLeService mBluetoothLeService;
     private String mDeviceName = "CubeMusic";
     private String mDeviceAddress = "00:15:83:00:CA:B9";
     private String old_data = "";
-    private MediaPlayer mediaPlayer = new MediaPlayer();
+    private MediaPlayer mediaPlayer;
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -142,7 +146,6 @@ public class TutorialActivity extends Activity {
                 registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
             }
         },3000);
-        mediaPlayer.setScreenOnWhilePlaying(true);
     }
 
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -172,68 +175,7 @@ public class TutorialActivity extends Activity {
 //                displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
                 String received_data = intent.getStringExtra(BluetoothLeService.EXTRA_DATA).trim();
                 if(!(received_data.equals(old_data))) {
-                    switch (received_data) {
-                        case "triangulo":
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    image.setImageResource(R.drawable.triangulo);
-                                }
-                            });
-                            mediaPlayer = MediaPlayer.create(getApplicationContext(),R.raw.c1);
-                            mediaPlayer.start();
-                            mediaPlayer.set
-                            break;
-                        case "circulo":
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    image.setImageResource(R.drawable.circulo);
-                                }
-                            });
-                            break;
-                        case "quadrado":
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    image.setImageResource(R.drawable.quadrado);
-                                }
-                            });
-                            break;
-                        case "quadrante":
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    image.setImageResource(R.drawable.quadrante);
-                                }
-                            });
-                            break;
-                        case "hexagono":
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    image.setImageResource(R.drawable.hexagono);
-                                }
-                            });
-                            break;
-                        case "estrela":
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    image.setImageResource(R.drawable.estrela);
-                                }
-                            });
-                            break;
-                        default:
-                            Log.d(this.getClass().getName(), received_data);
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    image.setImageResource(R.drawable.default_image);
-                                }
-                            });
-
-                    }
+                    updateImage(received_data);
                     old_data = received_data;
                 }
             }else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
@@ -264,6 +206,89 @@ public class TutorialActivity extends Activity {
         intentFilter.addAction(BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED);
         intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
         return intentFilter;
+    }
+
+    private void playSound(int resId){
+        try {
+            mediaPlayer = MediaPlayer.create(TutorialActivity.this, resId);
+            mediaPlayer.start();
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                public void onCompletion(MediaPlayer mp) {
+                    mp.stop();
+                    mp.release();
+                }
+            });
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void updateImage(String image_str){
+        switch (image_str) {
+            case "triangulo":
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        image.setImageResource(R.drawable.triangulo);
+                    }
+                });
+                playSound(R.raw.c1);
+                break;
+            case "circulo":
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        image.setImageResource(R.drawable.circulo);
+                    }
+                });
+                playSound(R.raw.d1);
+                break;
+            case "quadrado":
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        image.setImageResource(R.drawable.quadrado);
+                    }
+                });
+                playSound(R.raw.e1);
+                break;
+            case "quadrante":
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        image.setImageResource(R.drawable.quadrante);
+                    }
+                });
+                playSound(R.raw.f1);
+                break;
+            case "hexagono":
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        image.setImageResource(R.drawable.hexagono);
+                    }
+                });
+                playSound(R.raw.g1);
+                break;
+            case "estrela":
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        image.setImageResource(R.drawable.estrela);
+                    }
+                });
+                playSound(R.raw.a1);
+                break;
+            default:
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        image.setImageResource(R.drawable.default_image);
+                    }
+                });
+
+        }
     }
 
     @Override
