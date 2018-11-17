@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.res.AssetFileDescriptor;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -38,6 +39,7 @@ public class TutorialActivity extends Activity {
     private MediaPlayer mediaPlayer;
     private TextView msg;
     int cont_time = 0;
+
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -130,10 +132,11 @@ public class TutorialActivity extends Activity {
                 toggle();
             }
         });
-
+        Typeface font = Typeface.createFromAsset(getAssets(), "impact.ttf");
         msg = (TextView) findViewById(R.id.textMsg);
         image = (ImageView) findViewById(R.id.imageView);
         image.setImageResource(R.drawable.dialogo_fundo);
+        msg.setTypeface(font);
         msg.setVisibility(View.VISIBLE);
         msg.setText(R.string.vamos_la);
         //Espera 3s para começar
