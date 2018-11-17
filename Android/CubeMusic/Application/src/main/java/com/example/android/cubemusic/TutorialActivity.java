@@ -19,7 +19,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
+import android.view.Window;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.FileDescriptor;
 import java.io.IOException;
@@ -35,6 +37,7 @@ public class TutorialActivity extends Activity {
     private String mDeviceAddress = "00:15:83:00:CA:B9";
     private String old_data = "";
     private MediaPlayer mediaPlayer;
+    private TextView msg;
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -108,7 +111,7 @@ public class TutorialActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_tutorial);
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
@@ -128,20 +131,18 @@ public class TutorialActivity extends Activity {
             }
         });
 
-        // Upon interacting with UI controls, delay any scheduled hide()
-        // operations to prevent the jarring behavior of controls going away
-        // while interacting with the UI.
-        findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
-
+        msg = (TextView) findViewById(R.id.textMsg);
         image = (ImageView) findViewById(R.id.imageView);
-        image.setImageResource(R.drawable.dialogo1);
-
+        image.setImageResource(R.drawable.dialogo_fundo);
+        msg.setVisibility(View.VISIBLE);
+        msg.setText(R.string.vamos_la);
         //Espera 3s para começar
         final Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                msg.setVisibility(View.INVISIBLE);
                 bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
                 registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
             }
@@ -182,7 +183,9 @@ public class TutorialActivity extends Activity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        image.setImageResource(R.drawable.erro);
+                        image.setImageResource(R.drawable.dialogo_fundo);
+                        msg.setText("Conexão perdida.");
+                        msg.setVisibility(View.VISIBLE);
                     }
                 });
                 //Espera 3s para começar
