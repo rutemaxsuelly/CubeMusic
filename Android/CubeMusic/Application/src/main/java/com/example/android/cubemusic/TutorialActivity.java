@@ -33,11 +33,11 @@ import java.io.IOException;
 public class TutorialActivity extends Activity {
     private ImageView image;
     private BluetoothLeService mBluetoothLeService;
-    private String mDeviceName = "CubeMusic";
     private String mDeviceAddress = "00:15:83:00:CA:B9";
     private String old_data = "";
     private MediaPlayer mediaPlayer;
     private TextView msg;
+    int cont_time = 0;
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -172,12 +172,29 @@ public class TutorialActivity extends Activity {
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
+
             if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
 //                displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
                 String received_data = intent.getStringExtra(BluetoothLeService.EXTRA_DATA).trim();
                 if(!(received_data.equals(old_data))) {
+                    msg.setVisibility(View.INVISIBLE);
                     updateImage(received_data);
                     old_data = received_data;
+                    cont_time=0;
+                }else{
+                    if(cont_time==25){
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                image.setImageResource(R.drawable.dialogo_fundo);
+                                msg.setText("Mova o Cubo!");
+                                msg.setVisibility(View.VISIBLE);
+                            }
+                        });
+                        cont_time=0;
+                    }else {
+                        cont_time++;
+                    }
                 }
             }else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
                 runOnUiThread(new Runnable() {
@@ -192,6 +209,7 @@ public class TutorialActivity extends Activity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        msg.setVisibility(View.INVISIBLE);
                         Intent i = getBaseContext().getPackageManager().
                                 getLaunchIntentForPackage(getBaseContext().getPackageName());
                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -347,6 +365,13 @@ public class TutorialActivity extends Activity {
         // Schedule a runnable to display UI elements after a delay
         mHideHandler.removeCallbacks(mHidePart2Runnable);
         mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+        unbindService(mServiceConnection);
+        mBluetoothLeService = null;
+        unregisterReceiver(mGattUpdateReceiver);
     }
 
     /**
