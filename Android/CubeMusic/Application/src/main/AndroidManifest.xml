@@ -34,6 +34,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -67,11 +68,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.cubemusic.MainActivity" />
         </activity>
-        <activity android:name=".modo_Activity"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <activity android:name=".GameActivity" />
+        <activity android:name=".RecordesActivity"></activity>
     </application>
 
 </manifest>

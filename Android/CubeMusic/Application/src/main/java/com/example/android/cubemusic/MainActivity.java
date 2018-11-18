@@ -19,7 +19,7 @@ public class MainActivity extends Activity {
 
     public void goToGame(View view)
     {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, GameActivity.class);
         startActivity(intent);
     }
 
@@ -27,6 +27,13 @@ public class MainActivity extends Activity {
     {
 
         Intent intent = new Intent(this, TutorialActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToRecordes(View view)
+    {
+
+        Intent intent = new Intent(this, RecordesActivity.class);
         startActivity(intent);
     }
 }

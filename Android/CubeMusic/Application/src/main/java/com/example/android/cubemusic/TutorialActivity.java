@@ -9,6 +9,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.res.AssetFileDescriptor;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,19 +20,26 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.MenuItem;
 import android.support.v4.app.NavUtils;
+import android.view.Window;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.io.FileDescriptor;
+import java.io.IOException;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
 public class TutorialActivity extends Activity {
-    ImageView image;
+    private ImageView image;
     private BluetoothLeService mBluetoothLeService;
-    private String mDeviceName = "CubeMusic";
     private String mDeviceAddress = "00:15:83:00:CA:B9";
     private String old_data = "";
-    private MediaPlayer mediaPlayer = new MediaPlayer();
+    private MediaPlayer mediaPlayer;
+    private TextView msg;
+    int cont_time = 0;
+
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -104,7 +113,7 @@ public class TutorialActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_tutorial);
         ActionBar actionBar = getActionBar();
         if (actionBar != null) {
@@ -123,26 +132,24 @@ public class TutorialActivity extends Activity {
                 toggle();
             }
         });
-
-        // Upon interacting with UI controls, delay any scheduled hide()
-        // operations to prevent the jarring behavior of controls going away
-        // while interacting with the UI.
-        findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
-
+        Typeface font = Typeface.createFromAsset(getAssets(), "impact.ttf");
+        msg = (TextView) findViewById(R.id.textMsg);
         image = (ImageView) findViewById(R.id.imageView);
-        image.setImageResource(R.drawable.dialogo1);
-
+        image.setImageResource(R.drawable.dialogo_fundo);
+        msg.setTypeface(font);
+        msg.setVisibility(View.VISIBLE);
+        msg.setText(R.string.vamos_la);
         //Espera 3s para começar
         final Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                msg.setVisibility(View.INVISIBLE);
                 bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
                 registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
             }
         },3000);
-        mediaPlayer.setScreenOnWhilePlaying(true);
     }
 
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -168,85 +175,44 @@ public class TutorialActivity extends Activity {
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
+
             if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
 //                displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
                 String received_data = intent.getStringExtra(BluetoothLeService.EXTRA_DATA).trim();
                 if(!(received_data.equals(old_data))) {
-                    switch (received_data) {
-                        case "triangulo":
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    image.setImageResource(R.drawable.triangulo);
-                                }
-                            });
-                            mediaPlayer = MediaPlayer.create(getApplicationContext(),R.raw.c1);
-                            mediaPlayer.start();
-                            mediaPlayer.set
-                            break;
-                        case "circulo":
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    image.setImageResource(R.drawable.circulo);
-                                }
-                            });
-                            break;
-                        case "quadrado":
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    image.setImageResource(R.drawable.quadrado);
-                                }
-                            });
-                            break;
-                        case "quadrante":
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    image.setImageResource(R.drawable.quadrante);
-                                }
-                            });
-                            break;
-                        case "hexagono":
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    image.setImageResource(R.drawable.hexagono);
-                                }
-                            });
-                            break;
-                        case "estrela":
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    image.setImageResource(R.drawable.estrela);
-                                }
-                            });
-                            break;
-                        default:
-                            Log.d(this.getClass().getName(), received_data);
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    image.setImageResource(R.drawable.default_image);
-                                }
-                            });
-
-                    }
+                    msg.setVisibility(View.INVISIBLE);
+                    updateImage(received_data);
                     old_data = received_data;
+                    cont_time=0;
+                }else{
+                    if(cont_time==25){
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                image.setImageResource(R.drawable.dialogo_fundo);
+                                msg.setText("Mova o Cubo!");
+                                msg.setVisibility(View.VISIBLE);
+                            }
+                        });
+                        cont_time=0;
+                    }else {
+                        cont_time++;
+                    }
                 }
             }else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        image.setImageResource(R.drawable.erro);
+                        image.setImageResource(R.drawable.dialogo_fundo);
+                        msg.setText("Conexão perdida.");
+                        msg.setVisibility(View.VISIBLE);
                     }
                 });
                 //Espera 3s para começar
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        msg.setVisibility(View.INVISIBLE);
                         Intent i = getBaseContext().getPackageManager().
                                 getLaunchIntentForPackage(getBaseContext().getPackageName());
                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -264,6 +230,89 @@ public class TutorialActivity extends Activity {
         intentFilter.addAction(BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED);
         intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
         return intentFilter;
+    }
+
+    private void playSound(int resId){
+        try {
+            mediaPlayer = MediaPlayer.create(TutorialActivity.this, resId);
+            mediaPlayer.start();
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                public void onCompletion(MediaPlayer mp) {
+                    mp.stop();
+                    mp.release();
+                }
+            });
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void updateImage(String image_str){
+        switch (image_str) {
+            case "triangulo":
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        image.setImageResource(R.drawable.triangulo);
+                    }
+                });
+                playSound(R.raw.c1);
+                break;
+            case "circulo":
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        image.setImageResource(R.drawable.circulo);
+                    }
+                });
+                playSound(R.raw.d1);
+                break;
+            case "quadrado":
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        image.setImageResource(R.drawable.quadrado);
+                    }
+                });
+                playSound(R.raw.e1);
+                break;
+            case "quadrante":
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        image.setImageResource(R.drawable.quadrante);
+                    }
+                });
+                playSound(R.raw.f1);
+                break;
+            case "hexagono":
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        image.setImageResource(R.drawable.hexagono);
+                    }
+                });
+                playSound(R.raw.g1);
+                break;
+            case "estrela":
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        image.setImageResource(R.drawable.estrela);
+                    }
+                });
+                playSound(R.raw.a1);
+                break;
+            default:
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        image.setImageResource(R.drawable.default_image);
+                    }
+                });
+
+        }
     }
 
     @Override
@@ -319,6 +368,13 @@ public class TutorialActivity extends Activity {
         // Schedule a runnable to display UI elements after a delay
         mHideHandler.removeCallbacks(mHidePart2Runnable);
         mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+        unbindService(mServiceConnection);
+        mBluetoothLeService = null;
+        unregisterReceiver(mGattUpdateReceiver);
     }
 
     /**
