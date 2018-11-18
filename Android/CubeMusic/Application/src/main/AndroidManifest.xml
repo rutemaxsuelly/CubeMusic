@@ -56,7 +56,7 @@
 
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name" />
         <activity
             android:name=".TutorialActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -67,6 +67,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.cubemusic.MainActivity" />
         </activity>
+        <activity android:name=".modo_Activity"></activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
