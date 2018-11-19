@@ -185,7 +185,7 @@ public class TutorialActivity extends Activity {
                     old_data = received_data;
                     cont_time=0;
                 }else{
-                    if(cont_time==25){
+                    if(cont_time==20){
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
