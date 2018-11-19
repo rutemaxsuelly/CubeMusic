@@ -79,10 +79,10 @@
         <activity android:name=".GameActivity" />
         <activity android:name=".RecordesActivity" />
         <activity
-            android:name=".Vitoria_Activity"
+            android:name=".VitoriaActivity"
             android:label="@string/title_activity_vitoria_" />
         <activity
-            android:name=".derrota_Activity"
+            android:name=".DerrotaActivity"
             android:label="@string/title_activity_derrota_"></activity>
     </application>
 

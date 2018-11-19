@@ -31,7 +31,6 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -69,7 +68,7 @@ public class DeviceScanActivity extends ListActivity {
         mHandler = new Handler();
         if (Build.VERSION.SDK_INT >= 23) {
             // Marshmallow+ Permission APIs
-            fuckMarshMallow();
+            deviceMarshMallow();
         }
         // Use this check to determine whether BLE is supported on the device.  Then you can
         // selectively disable BLE-related features.
@@ -327,7 +326,7 @@ public class DeviceScanActivity extends ListActivity {
 
 
     @TargetApi(Build.VERSION_CODES.M)
-    private void fuckMarshMallow() {
+    private void deviceMarshMallow() {
         List<String> permissionsNeeded = new ArrayList<String>();
 
         final List<String> permissionsList = new ArrayList<String>();
@@ -359,7 +358,7 @@ public class DeviceScanActivity extends ListActivity {
             return;
         }
 
-        Toast.makeText(DeviceScanActivity.this, "No new Permission Required- Launching App .You are Awesome!!", Toast.LENGTH_SHORT)
+        Toast.makeText(DeviceScanActivity.this, "No new Permission Required- Launching App .", Toast.LENGTH_SHORT)
                 .show();
     }
 

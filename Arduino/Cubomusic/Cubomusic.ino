@@ -69,28 +69,28 @@ void loop(){
   
   //face detect 1,2,...,6
   if (abs(AcX-0)<2  && abs(AcY-0)<2 && abs(AcZ+6)<2) {
-    Serial.println(" quadrante ");
-    ble.write("quadrante\n");
+    Serial.println(" quadrado ");
+    ble.write("quadrado");
   }
   else if (abs(AcX-0)<2  && abs(AcY+6)<2 && abs(AcZ-0)<2) {
     Serial.println(" triangulo ");
-    ble.write("triangulo\n");
+    ble.write("triangulo");
   }
   else if (abs(AcX-0)<2  && abs(AcY-0)<2 && abs(AcZ-6)<2) {
-    Serial.println(" estrela ");
-    ble.write("estrela\n");
+    Serial.println(" circulo ");
+    ble.write("circulo");
   }
   else if (abs(AcX-0)<2  && abs(AcY-6)<2 && abs(AcZ-0)<2) {
-    Serial.println(" circulo ");
-    ble.write("circulo\n");
+    Serial.println(" hexagono ");
+    ble.write("hexagono");
   }
   else if (abs(AcX-6)<2  && abs(AcY-0)<2 && abs(AcZ-0)<2) {
-    Serial.println(" hexagono ");
-    ble.write("hexagono\n");
+    Serial.println(" estrela ");
+    ble.write("estrela");
   }
   else if (abs(AcX+6)<2  && abs(AcY-0)<2 && abs(AcZ-0)<2) {
-    Serial.println(" quadrado ");
-    ble.write("quadrado\n");
+    Serial.println(" quadrante ");
+    ble.write("quadrante");
   }
 
   //other cases

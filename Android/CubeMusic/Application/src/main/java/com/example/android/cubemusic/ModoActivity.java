@@ -1,14 +1,14 @@
 package com.example.android.cubemusic;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 
-public class Vitoria_Activity extends Activity {
+public class ModoActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vitoria_);
+        setContentView(R.layout.activity_modo_);
     }
-
 }

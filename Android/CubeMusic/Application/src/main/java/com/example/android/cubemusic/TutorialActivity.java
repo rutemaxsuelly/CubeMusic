@@ -132,7 +132,9 @@ public class TutorialActivity extends Activity {
                 toggle();
             }
         });
+
         Typeface font = Typeface.createFromAsset(getAssets(), "impact.ttf");
+
         msg = (TextView) findViewById(R.id.textMsg);
         image = (ImageView) findViewById(R.id.imageView);
         image.setImageResource(R.drawable.dialogo_fundo);

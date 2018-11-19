@@ -1,13 +1,14 @@
 package com.example.android.cubemusic;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.app.Activity;
 
-public class modo_Activity extends AppCompatActivity {
+public class DerrotaActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_modo_);
+        setContentView(R.layout.activity_derrota_);
     }
+
 }
