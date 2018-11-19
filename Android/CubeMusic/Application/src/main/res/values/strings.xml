@@ -41,4 +41,12 @@
     <string name="title_item_detail">Item Detail</string>
     <string name="title_activity_vitoria_">Vitoria_Activity</string>
     <string name="title_activity_derrota_">derrota_Activity</string>
+    <string name="primeiro_lugar">1°Lugar</string>
+    <string name="segundo_lugar">2°Lugar</string>
+    <string name="terceiro_lugar">3°Lugar</string>
+    <string name="quarto_lugar">4°Lugar</string>
+    <string name="quinto_lugar">5°Lugar</string>
+    <string name="sexto_lugar">6°Lugar</string>
+
+
 </resources>
