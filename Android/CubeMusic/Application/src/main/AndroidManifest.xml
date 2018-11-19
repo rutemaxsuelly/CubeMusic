@@ -74,7 +74,13 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".GameActivity" />
-        <activity android:name=".RecordesActivity"></activity>
+        <activity android:name=".RecordesActivity" />
+        <activity
+            android:name=".Vitoria_Activity"
+            android:label="@string/title_activity_vitoria_" />
+        <activity
+            android:name=".derrota_Activity"
+            android:label="@string/title_activity_derrota_"></activity>
     </application>
 
 </manifest>

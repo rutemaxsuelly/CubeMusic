@@ -37,4 +37,8 @@
     <string name="dummy_button">Desistir</string>
     <string name="dummy_content">CubeMusic</string>
     <string name="vamos_la">Vamos Começar!</string>
+    <string name="title_item_list">Items</string>
+    <string name="title_item_detail">Item Detail</string>
+    <string name="title_activity_vitoria_">Vitoria_Activity</string>
+    <string name="title_activity_derrota_">derrota_Activity</string>
 </resources>
