@@ -114,15 +114,13 @@
 
     <TextView
         android:id="@+id/textMsg"
-        android:layout_width="58dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="95dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="94dp"
         android:layout_marginEnd="95dp"
-        android:layout_marginBottom="124dp"
         android:fontFamily="@font/impact"
         android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
