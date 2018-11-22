@@ -28,6 +28,9 @@ public class RecordesActivity extends Activity {
 
         // Set up the user interaction to manually show or hide the system UI.
         Typeface font = Typeface.createFromAsset(getAssets(), "impact.ttf");
+        recordes_txt = (TextView) findViewById(R.id.textView2);
+        recordes_txt.setTypeface(font);
+
         lugar_1 = (TextView) findViewById(R.id.textView4);
         lugar_1.setTypeface(font);
         lugar_1.setText(R.string.primeiro_lugar);
