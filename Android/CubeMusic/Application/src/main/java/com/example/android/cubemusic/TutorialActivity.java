@@ -141,6 +141,7 @@ public class TutorialActivity extends Activity {
         msg.setTypeface(font);
         msg.setVisibility(View.VISIBLE);
         msg.setText(R.string.vamos_la);
+        playSound(R.raw.advamoscomecar);
         //Espera 3s para começar
         final Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
 
@@ -194,8 +195,10 @@ public class TutorialActivity extends Activity {
                                 image.setImageResource(R.drawable.dialogo_fundo);
                                 msg.setText("Mova o Cubo!");
                                 msg.setVisibility(View.VISIBLE);
+                                playSound(R.raw.admovacubo);
                             }
                         });
+
                         cont_time=0;
                     }else {
                         cont_time++;
