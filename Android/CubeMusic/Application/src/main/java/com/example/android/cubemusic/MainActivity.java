@@ -14,12 +14,11 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-        Log.d("Chegou", "OK");
     }
 
     public void goToGame(View view)
     {
-        Intent intent = new Intent(this, GameActivity.class);
+        Intent intent = new Intent(this, ModoActivity.class);
         startActivity(intent);
     }
 

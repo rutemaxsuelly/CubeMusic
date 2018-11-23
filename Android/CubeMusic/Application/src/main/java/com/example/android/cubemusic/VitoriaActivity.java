@@ -2,6 +2,7 @@ package com.example.android.cubemusic;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Handler;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 public class VitoriaActivity extends Activity {
     private TextView msg;
+    private MediaPlayer mediaPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,14 +23,30 @@ public class VitoriaActivity extends Activity {
         msg = (TextView) findViewById(R.id.textView3);
         msg.setTypeface(font);
         msg.setText(pontos);
-
+        playSound(R.raw.advitoria);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent intent = new Intent(VitoriaActivity.this, MainActivity.class);
                 startActivity(intent);
             }
-        },3000);
+        },5000);
+    }
+
+    private void playSound(int resId){
+        try {
+            mediaPlayer = MediaPlayer.create(VitoriaActivity.this, resId);
+            mediaPlayer.start();
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                public void onCompletion(MediaPlayer mp) {
+                    mp.stop();
+                    mp.release();
+                }
+            });
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

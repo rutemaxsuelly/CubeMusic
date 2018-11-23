@@ -62,6 +62,9 @@
             android:name=".MainActivity"
             android:label="@string/app_name" />
         <activity
+            android:name=".ModoActivity"
+            android:label="@string/app_name" />
+        <activity
             android:name=".TutorialActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_game"

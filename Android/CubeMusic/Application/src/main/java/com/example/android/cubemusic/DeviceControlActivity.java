@@ -194,8 +194,11 @@ public class DeviceControlActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //unbindService(mServiceConnection);
-        //mBluetoothLeService = null;
+        if(mServiceConnection != null)
+            unbindService(mServiceConnection);
+        if(mGattUpdateReceiver != null)
+            unregisterReceiver(mGattUpdateReceiver);
+        mBluetoothLeService = null;
     }
 
     @Override

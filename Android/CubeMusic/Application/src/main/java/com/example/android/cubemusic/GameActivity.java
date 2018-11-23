@@ -79,9 +79,6 @@ public class GameActivity extends Activity {
             e.printStackTrace();
         }
 
-
-
-
     }
 
 
@@ -121,8 +118,7 @@ public class GameActivity extends Activity {
                 image_center.setImageResource(R.drawable.dialogo_fundo);
                 msg.setVisibility(View.VISIBLE);
                 msg.setText(R.string.vamos_la);
-
-
+                playSound(R.raw.advamoscomecar);
 
         handler_game_view = new Handler();
         runnable_game_view = new Runnable() {
@@ -187,6 +183,7 @@ public class GameActivity extends Activity {
                                         intent = new Intent(GameActivity.this, VitoriaActivity.class);
                                         intent.putExtra("PONTOS", String.valueOf(pontos) + " Pontos");
                                         startActivity(intent);
+                                        finish();
 
                                     }else if(old_data.equals(facesCubo.get(notasCubo.indexOf(seqMusica.get(user_counter)))) && user_counter == advanceGameCounter) {
                                         //Usuário acertou a fase
@@ -199,6 +196,7 @@ public class GameActivity extends Activity {
                                         intent = new Intent(GameActivity.this, DerrotaActivity.class);
                                         intent.putExtra("PONTOS", String.valueOf(pontos) + " Pontos");
                                         startActivity(intent);
+                                        finish();
                                     }
                                 }
 
@@ -233,6 +231,10 @@ public class GameActivity extends Activity {
     }
 
     private void msgTela(final String msgstr){
+        switch (msgstr){
+            case "Agora é sua vez!":
+                playSound(R.raw.adsuavez);
+        }
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
