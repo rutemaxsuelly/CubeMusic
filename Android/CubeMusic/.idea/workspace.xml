@@ -16,8 +16,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a96f7dd8-433d-4fe7-8946-2a01b7256fc8" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Application/src/main/res/drawable-hdpi/erro.png" beforeDir="false" afterPath="$PROJECT_DIR$/Application/src/main/res/drawable-hdpi/erro.png" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -104,7 +102,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="activity_main.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Application/src/main/res/layout/activity_main.xml">
           <provider selected="true" editor-type-id="android-designer2">
             <state />
@@ -136,7 +134,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_derrota_.xml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="activity_derrota_.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Application/src/main/res/layout/activity_derrota_.xml">
           <provider selected="true" editor-type-id="android-designer2">
             <state />
@@ -2846,14 +2844,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Application/src/main/res/layout/activity_derrota_.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Application/src/main/res/layout/activity_game.xml">
       <provider selected="true" editor-type-id="android-designer2">
         <state />
@@ -2881,6 +2871,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Application/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/src/main/res/layout/activity_derrota_.xml">
       <provider selected="true" editor-type-id="android-designer2">
         <state />
       </provider>
