@@ -47,6 +47,13 @@
     <string name="quarto_lugar">4°Lugar</string>
     <string name="quinto_lugar">5°Lugar</string>
     <string name="sexto_lugar">6°Lugar</string>
+    <string name="triangulo">triangulo</string>
+    <string name="quadrado">quadrado</string>
+    <string name="circulo">circulo</string>
+    <string name="quadrante">quadrante</string>
+    <string name="estrela">estrela</string>
+    <string name="hexagono">hexagono</string>
+    <string name="suaVez">Agora é sua vez!</string>
 
 
 </resources>

@@ -1,0 +1,12 @@
+triangulo
+c1
+circulo
+d1
+quadrado
+e1
+quadrante
+f1
+hexagono
+g1
+estrela
+a1
