@@ -125,13 +125,7 @@ public class TutorialActivity extends Activity {
         mContentView = findViewById(R.id.fullscreen_content);
 
 
-        // Set up the user interaction to manually show or hide the system UI.
-        mContentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggle();
-            }
-        });
+
 
         Typeface font = Typeface.createFromAsset(getAssets(), "impact.ttf");
 
@@ -153,6 +147,18 @@ public class TutorialActivity extends Activity {
                 registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
             }
         },3000);
+    }
+
+    public void onBackButton(View view){
+        startActivity(new Intent(this, MainActivity.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
+        finish();
+    }
+
+    @Override
+    public void onBackPressed(){ //Botão BACK padrão do android
+        startActivity(new Intent(this, MainActivity.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)
+        finishAffinity(); //Método para matar a activity e não deixa-lá indexada na pilhagem
+        return;
     }
 
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -377,11 +383,15 @@ public class TutorialActivity extends Activity {
 
     public void onDestroy() {
         super.onDestroy();
+        try {
         if(mServiceConnection != null)
             unbindService(mServiceConnection);
         if(mGattUpdateReceiver != null)
             unregisterReceiver(mGattUpdateReceiver);
         mBluetoothLeService = null;
+        }catch (IllegalArgumentException e){
+            e.printStackTrace();
+        }
     }
 
     /**

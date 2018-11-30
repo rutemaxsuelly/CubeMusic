@@ -74,6 +74,15 @@
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/back"
+            android:onClick="onBackButton"
+            tools:layout_editor_absoluteX="10dp"
+            tools:layout_editor_absoluteY="8dp" />
+
     </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>

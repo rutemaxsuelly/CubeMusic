@@ -9,11 +9,13 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -51,6 +53,10 @@ public class GameActivity extends Activity {
     private Runnable runnable_game_view;
     private Handler handler_vamos_la;
     private Runnable runnable_vamos_la;
+    private Handler handler_suaVez;
+    private Runnable runnable_suaVez;
+    private Handler handler_usuario;
+    private Runnable runnable_usuario;
     private int pontos = 0;
 
     @Override
@@ -58,6 +64,9 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_game);
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        decorView.setSystemUiVisibility(uiOptions);
         assetManager = getResources().getAssets();
 
         Typeface font = Typeface.createFromAsset(getAssets(), "impact.ttf");
@@ -75,14 +84,40 @@ public class GameActivity extends Activity {
             playGame();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
 
     }
 
+    public void onBackButton(View view){
+        startActivity(new Intent(this, ModoActivity.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)
+        if(runnable_vamos_la != null)
+            handler_vamos_la.removeCallbacks(runnable_vamos_la);
+        if(runnable_game_view !=null)
+            handler_game_view.removeCallbacks(runnable_game_view);
+        if(runnable_suaVez != null)
+            handler_suaVez.removeCallbacks(runnable_suaVez);
+        if(runnable_usuario != null)
+            handler_usuario.removeCallbacks(runnable_usuario);
+        finishAffinity();
+    }
 
-    private void playGame() throws IOException, InterruptedException {
+    @Override
+    public void onBackPressed(){ //Botão BACK padrão do android
+        startActivity(new Intent(this, ModoActivity.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)
+        if(runnable_vamos_la != null)
+            handler_vamos_la.removeCallbacks(runnable_vamos_la);
+        if(runnable_game_view !=null)
+            handler_game_view.removeCallbacks(runnable_game_view);
+        if(runnable_suaVez != null)
+            handler_suaVez.removeCallbacks(runnable_suaVez);
+        if(runnable_usuario != null)
+            handler_usuario.removeCallbacks(runnable_usuario);
+        finishAffinity(); //Método para matar a activity e não deixa-lá indexada na pilhagem
+        return;
+    }
+
+
+    private void playGame() throws IOException {
         //Lê sequência do arquivo
         inputStream = assetManager.open("music.txt");
         inputStreamReader = new InputStreamReader(inputStream);
@@ -160,13 +195,13 @@ public class GameActivity extends Activity {
                     handler_game_view.postDelayed(this, 500);  //for interval...
                     counter++;
                 }else {
-                    final Handler handler_suaVez = new Handler();
-                    Runnable runnable_suaVez = new Runnable() {
+                    handler_suaVez = new Handler();
+                    runnable_suaVez = new Runnable() {
                         public void run() {
                             msgTela(getResources().getString(R.string.suaVez));
                             user_counter = 0;
-                            final Handler handler_usuario = new Handler();
-                            Runnable runnable_usuario = new Runnable() {
+                            handler_usuario = new Handler();
+                            runnable_usuario = new Runnable() {
                                 public void run() {
                                     msg.setVisibility(View.INVISIBLE);
 
@@ -466,5 +501,14 @@ public class GameActivity extends Activity {
                     }
                 });
         }
+
+    }
+    public void onDestroy() {
+        super.onDestroy();
+        if(mServiceConnection != null)
+            unbindService(mServiceConnection);
+        if(mGattUpdateReceiver != null)
+            unregisterReceiver(mGattUpdateReceiver);
+        mBluetoothLeService = null;
     }
 }
