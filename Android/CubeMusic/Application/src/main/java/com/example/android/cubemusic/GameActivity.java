@@ -170,22 +170,27 @@ public class GameActivity extends Activity {
                     case "d1":
                         updateImage(facesCubo.get(notasCubo.indexOf(nota)));
                         playSound(R.raw.d1);
+                        playSound(R.raw.circulo);
                         break;
                     case "e1":
                         updateImage(facesCubo.get(notasCubo.indexOf(nota)));
                         playSound(R.raw.e1);
+                        playSound(R.raw.quadrado);
                         break;
                     case "f1":
                         updateImage(facesCubo.get(notasCubo.indexOf(nota)));
                         playSound(R.raw.f1);
+                        playSound(R.raw.quadrante);
                         break;
                     case "g1":
                         updateImage(facesCubo.get(notasCubo.indexOf(nota)));
                         playSound(R.raw.g1);
+                        playSound(R.raw.hexagono);
                         break;
                     case "a1":
                         updateImage(facesCubo.get(notasCubo.indexOf(nota)));
                         playSound(R.raw.a1);
+                        playSound(R.raw.estrela);
                         break;
                     default:
                         updateImage("nada");
@@ -211,7 +216,7 @@ public class GameActivity extends Activity {
                                         //Espera o usuário colocar a próxima figura
                                         user_counter++;
                                         pontos+=10;
-                                        handler_usuario.postDelayed(this, 1500);
+                                        handler_usuario.postDelayed(this, 2500);
                                     }else if(old_data.equals(facesCubo.get(notasCubo.indexOf(seqMusica.get(user_counter)))) && (user_counter == seqMusica.size()-1)){
                                         //Usuário acertou tudo
                                         pontos+=30;
@@ -267,7 +272,7 @@ public class GameActivity extends Activity {
 
     private void msgTela(final String msgstr){
         switch (msgstr){
-            case "Agora é sua vez!":
+            case "Sua vez!":
                 playSound(R.raw.adsuavez);
         }
         runOnUiThread(new Runnable() {

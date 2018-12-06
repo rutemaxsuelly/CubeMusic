@@ -269,6 +269,7 @@ public class TutorialActivity extends Activity {
                     }
                 });
                 playSound(R.raw.c1);
+                playSound(R.raw.triangulo);
                 break;
             case "circulo":
                 runOnUiThread(new Runnable() {
@@ -278,6 +279,7 @@ public class TutorialActivity extends Activity {
                     }
                 });
                 playSound(R.raw.d1);
+                playSound(R.raw.circulo);
                 break;
             case "quadrado":
                 runOnUiThread(new Runnable() {
@@ -287,6 +289,7 @@ public class TutorialActivity extends Activity {
                     }
                 });
                 playSound(R.raw.e1);
+                playSound(R.raw.quadrado);
                 break;
             case "quadrante":
                 runOnUiThread(new Runnable() {
@@ -296,6 +299,7 @@ public class TutorialActivity extends Activity {
                     }
                 });
                 playSound(R.raw.f1);
+                playSound(R.raw.quadrante);
                 break;
             case "hexagono":
                 runOnUiThread(new Runnable() {
@@ -305,6 +309,7 @@ public class TutorialActivity extends Activity {
                     }
                 });
                 playSound(R.raw.g1);
+                playSound(R.raw.hexagono);
                 break;
             case "estrela":
                 runOnUiThread(new Runnable() {
@@ -314,6 +319,7 @@ public class TutorialActivity extends Activity {
                     }
                 });
                 playSound(R.raw.a1);
+                playSound(R.raw.estrela);
                 break;
             default:
                 runOnUiThread(new Runnable() {
