@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Handler;
+import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
@@ -47,6 +48,11 @@ public class DerrotaActivity extends Activity {
             e.printStackTrace();
         }
 
+    }
+    public void backerrou(View view){
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 }

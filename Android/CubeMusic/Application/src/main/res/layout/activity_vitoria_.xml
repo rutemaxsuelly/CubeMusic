@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
         android:textSize="36sp"
+        android:textColor="@android:color/holo_green_dark"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="@+id/imageView3"
         app:layout_constraintStart_toStartOf="@+id/imageView3" />

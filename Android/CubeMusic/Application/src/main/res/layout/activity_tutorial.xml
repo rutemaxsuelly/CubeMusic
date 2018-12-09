@@ -54,7 +54,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:fontFamily="@font/impact"
-            android:text="@string/vamos_la"
+            android:text="@string/vamos"
             android:textSize="36sp"
             android:typeface="normal"
             android:visibility="visible"
@@ -79,7 +79,7 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="11dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="330dp"
             android:background="@drawable/back"
             android:onClick="onBackButton"
@@ -89,18 +89,18 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView11"
-            android:layout_width="143dp"
-            android:layout_height="29dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="8dp"
-            android:text="TUTORIAL"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/textView12"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="90dp"
+            android:fontFamily="@font/impact"
+            android:text="@string/mod_tutorial"
+            android:textSize="36sp"
+            android:typeface="normal"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/back"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.01999998" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 

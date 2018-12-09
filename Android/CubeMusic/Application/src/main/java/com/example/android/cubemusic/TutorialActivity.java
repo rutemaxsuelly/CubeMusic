@@ -38,6 +38,7 @@ public class TutorialActivity extends Activity {
     private String old_data = "";
     private MediaPlayer mediaPlayer;
     private TextView msg;
+    private TextView modotutorial;
     int cont_time = 0;
 
     /**
@@ -110,6 +111,7 @@ public class TutorialActivity extends Activity {
         }
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,17 +127,27 @@ public class TutorialActivity extends Activity {
         mContentView = findViewById(R.id.fullscreen_content);
 
 
-
-
         Typeface font = Typeface.createFromAsset(getAssets(), "impact.ttf");
+
+        modotutorial = (TextView) findViewById(R.id.textView12);
+        modotutorial.setTypeface(font);
+        modotutorial.setText(R.string.mod_tutorial);
 
         msg = (TextView) findViewById(R.id.textMsg);
         image = (ImageView) findViewById(R.id.imageView);
         image.setImageResource(R.drawable.dialogo_fundo);
         msg.setTypeface(font);
         msg.setVisibility(View.VISIBLE);
-        msg.setText(R.string.vamos_la);
+        msg.setText(R.string.vamos);
         playSound(R.raw.advamoscomecar);
+
+        //INSERIR INSTRUÇÃO PARA O JOGADOR DEIXAR O CUBO PARA CIMA
+        //msg.setTypeface(font);
+        //msg.setVisibility(View.VISIBLE);
+        //image.setImageResource(R.drawable.dialogo_fundo);
+        //msg.setText("Atenção: A face de cima será sempre a sua resposta");
+        //playSound(R.raw.adatencao);
+
         //Espera 3s para começar
         final Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
 
@@ -153,12 +165,12 @@ public class TutorialActivity extends Activity {
         startActivity(new Intent(this, MainActivity.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
         finish();
     }
-
     @Override
     public void onBackPressed(){ //Botão BACK padrão do android
         startActivity(new Intent(this, MainActivity.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)
         finishAffinity(); //Método para matar a activity e não deixa-lá indexada na pilhagem
         return;
+
     }
 
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -208,6 +220,7 @@ public class TutorialActivity extends Activity {
                         cont_time=0;
                     }else {
                         cont_time++;
+
                     }
                 }
             }else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
@@ -335,7 +348,6 @@ public class TutorialActivity extends Activity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-
         // Trigger the initial hide() shortly after the activity has been
         // created, to briefly hint to the user that UI controls
         // are available.

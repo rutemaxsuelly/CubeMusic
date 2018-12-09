@@ -36,7 +36,8 @@
     <string name="title_activity_game">CubeMusic</string>
     <string name="dummy_button">Desistir</string>
     <string name="dummy_content">CubeMusic</string>
-    <string name="vamos_la">Vamos Começar!</string>
+    <string name="vamos_la">Decore a Sequência!</string>
+    <string name="vamos">Vamos Começar!</string>
     <string name="title_item_list">Items</string>
     <string name="title_item_detail">Item Detail</string>
     <string name="title_activity_vitoria_">Vitoria_Activity</string>
@@ -53,7 +54,11 @@
     <string name="quadrante">quadrante</string>
     <string name="estrela">estrela</string>
     <string name="hexagono">hexagono</string>
-    <string name="suaVez">Agora é sua vez!</string>
+    <string name="suaVez">Sua vez!</string>
+    <string name="mod_tutorial">MODO TUTORIAL</string>
+    <string name="mod_genius">MODO GENIUS</string>
+    <string name="recordes">Recordes</string>
+    <string name="selecao_nivel">Selecione Nível:</string>
 
 
 </resources>

@@ -14,6 +14,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -58,6 +59,8 @@ public class GameActivity extends Activity {
     private Handler handler_usuario;
     private Runnable runnable_usuario;
     private int pontos = 0;
+    //Globals g=(Globals)getApplication();
+    //inint modogenius=g.getModogenius;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,7 +122,13 @@ public class GameActivity extends Activity {
 
     private void playGame() throws IOException {
         //Lê sequência do arquivo
-        inputStream = assetManager.open("music.txt");
+        if(ModoActivity.modogenius==1){
+            inputStream = assetManager.open("music.txt");
+        }else if (ModoActivity.modogenius==2){
+            inputStream = assetManager.open("music2.txt");
+        }
+
+
         inputStreamReader = new InputStreamReader(inputStream);
         bufferedReader = new BufferedReader(inputStreamReader);
         String linha = "";
@@ -141,8 +150,7 @@ public class GameActivity extends Activity {
             }
         }
 
-
-        counter = 0;
+            counter = 0;
         advanceGameCounter = 0;
         //Vamos Lá!
 
@@ -153,7 +161,7 @@ public class GameActivity extends Activity {
                 image_center.setImageResource(R.drawable.dialogo_fundo);
                 msg.setVisibility(View.VISIBLE);
                 msg.setText(R.string.vamos_la);
-                playSound(R.raw.advamoscomecar);
+                playSound(R.raw.addecore);
 
         handler_game_view = new Handler();
         runnable_game_view = new Runnable() {
@@ -166,6 +174,7 @@ public class GameActivity extends Activity {
                     case "c1":
                         updateImage(facesCubo.get(notasCubo.indexOf(nota)));
                         playSound(R.raw.c1);
+                        playSound(R.raw.triangulo);
                         break;
                     case "d1":
                         updateImage(facesCubo.get(notasCubo.indexOf(nota)));
@@ -197,7 +206,7 @@ public class GameActivity extends Activity {
                 }
 
                 if(counter < seqMusica.size()-1 && counter < advanceGameCounter) {
-                    handler_game_view.postDelayed(this, 500);  //for interval...
+                    handler_game_view.postDelayed(this, 2000);  //for interval...
                     counter++;
                 }else {
                     handler_suaVez = new Handler();
@@ -391,6 +400,7 @@ public class GameActivity extends Activity {
                     }
                 });
                 playSound(R.raw.c1);
+                playSound(R.raw.triangulo);
                 break;
             case "circulo":
                 runOnUiThread(new Runnable() {
@@ -400,6 +410,7 @@ public class GameActivity extends Activity {
                     }
                 });
                 playSound(R.raw.d1);
+                playSound(R.raw.circulo);
                 break;
             case "quadrado":
                 runOnUiThread(new Runnable() {
@@ -409,6 +420,8 @@ public class GameActivity extends Activity {
                     }
                 });
                 playSound(R.raw.e1);
+                playSound(R.raw.quadrado);
+
                 break;
             case "quadrante":
                 runOnUiThread(new Runnable() {
@@ -418,6 +431,7 @@ public class GameActivity extends Activity {
                     }
                 });
                 playSound(R.raw.f1);
+                playSound(R.raw.quadrante);
                 break;
             case "hexagono":
                 runOnUiThread(new Runnable() {
@@ -427,6 +441,7 @@ public class GameActivity extends Activity {
                     }
                 });
                 playSound(R.raw.g1);
+                playSound(R.raw.hexagono);
                 break;
             case "estrela":
                 runOnUiThread(new Runnable() {
@@ -436,6 +451,7 @@ public class GameActivity extends Activity {
                     }
                 });
                 playSound(R.raw.a1);
+                playSound(R.raw.estrela);
                 break;
             default:
                 runOnUiThread(new Runnable() {
