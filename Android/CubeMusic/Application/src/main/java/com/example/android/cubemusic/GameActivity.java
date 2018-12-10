@@ -265,17 +265,6 @@ public class GameActivity extends Activity {
             }
         };
         handler_vamos_la.post(runnable_vamos_la);
-//        handler_game_view.removeCallbacks(runnable_game_view);
-
-
-
-//                if (old_data.equals(getResources().getString(R.string.triangulo))){
-//                    Log.d("Aqui!!", "triangulo");
-//                    intent = new Intent(GameActivity.this, VitoriaActivity.class);
-//                }else{
-//                    Log.d("Aqui!!", old_data);
-//                    intent = new Intent(GameActivity.this, DerrotaActivity.class);
-//                }
 
     }
 

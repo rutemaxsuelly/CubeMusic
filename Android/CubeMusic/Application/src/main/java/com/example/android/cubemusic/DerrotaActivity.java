@@ -94,9 +94,16 @@ public class DerrotaActivity extends Activity {
             rPlayer[c] = value;//record player
 
             //Save score
-            editor.putInt("count", c);
+            if(c==0) {
+                editor.putInt("count", c + 1);
+            }else {
+                editor.putInt("count", c);
+            }
+
             editor.putInt(nPlayer[c], rPlayer[c]);
             editor.commit();
+
+
 
 
         }else if(value > rPlayer[c]){

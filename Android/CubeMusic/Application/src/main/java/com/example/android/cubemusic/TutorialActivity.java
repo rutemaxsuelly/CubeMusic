@@ -163,7 +163,7 @@ public class TutorialActivity extends Activity {
 
     public void onBackButton(View view){
         startActivity(new Intent(this, MainActivity.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
-        finish();
+        finishAffinity();
     }
     @Override
     public void onBackPressed(){ //Botão BACK padrão do android
@@ -213,10 +213,9 @@ public class TutorialActivity extends Activity {
                                 image.setImageResource(R.drawable.dialogo_fundo);
                                 msg.setText("Mova o Cubo!");
                                 msg.setVisibility(View.VISIBLE);
-                                playSound(R.raw.admovacubo);
                             }
                         });
-
+                        playSound(R.raw.admovacubo);
                         cont_time=0;
                     }else {
                         cont_time++;
@@ -401,15 +400,11 @@ public class TutorialActivity extends Activity {
 
     public void onDestroy() {
         super.onDestroy();
-        try {
         if(mServiceConnection != null)
             unbindService(mServiceConnection);
         if(mGattUpdateReceiver != null)
             unregisterReceiver(mGattUpdateReceiver);
         mBluetoothLeService = null;
-        }catch (IllegalArgumentException e){
-            e.printStackTrace();
-        }
     }
 
     /**
