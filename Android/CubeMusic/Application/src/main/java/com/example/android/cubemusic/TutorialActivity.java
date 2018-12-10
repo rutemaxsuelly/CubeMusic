@@ -400,11 +400,15 @@ public class TutorialActivity extends Activity {
 
     public void onDestroy() {
         super.onDestroy();
-        if(mServiceConnection != null)
-            unbindService(mServiceConnection);
-        if(mGattUpdateReceiver != null)
-            unregisterReceiver(mGattUpdateReceiver);
-        mBluetoothLeService = null;
+        try {
+            if (mServiceConnection != null)
+                unbindService(mServiceConnection);
+            if (mGattUpdateReceiver != null)
+                unregisterReceiver(mGattUpdateReceiver);
+            mBluetoothLeService = null;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
