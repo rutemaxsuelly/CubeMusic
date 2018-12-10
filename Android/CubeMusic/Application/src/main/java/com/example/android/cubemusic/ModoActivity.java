@@ -11,7 +11,7 @@ import android.view.Window;
 import android.widget.TextView;
 
 public class ModoActivity extends Activity {
-    public static int modogenius;
+    private int modogenius;
 
     private TextView selecao;
     private TextView modotop;
@@ -65,19 +65,21 @@ public class ModoActivity extends Activity {
     @Override
     public void onBackPressed(){ //Botão BACK padrão do android
         startActivity(new Intent(this, MainActivity.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)
-        finishAffinity(); //Método para matar a activity e não deixa-lá indexada na pilhagem
+        finish(); //Método para matar a activity e não deixa-lá indexada na pilhagem
         return;
     }
 
     public void goToGenius(View view){
         modogenius=1;
         Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra("MODO", String.valueOf(modogenius));
         startActivity(intent);
         finish();
     }
    public void goToGenius2(View view){
         modogenius=2;
         Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra("MODO", String.valueOf(modogenius));
         startActivity(intent);
         finish();
     }

@@ -59,14 +59,20 @@ public class GameActivity extends Activity {
     private Handler handler_usuario;
     private Runnable runnable_usuario;
     private int pontos = 0;
+    private int modoGenius;
     //Globals g=(Globals)getApplication();
     //inint modogenius=g.getModogenius;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_game);
+
+        String modo= getIntent().getStringExtra("MODO");
+        modoGenius = Integer.parseInt(modo);
+
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         decorView.setSystemUiVisibility(uiOptions);
@@ -101,7 +107,7 @@ public class GameActivity extends Activity {
             handler_suaVez.removeCallbacks(runnable_suaVez);
         if(runnable_usuario != null)
             handler_usuario.removeCallbacks(runnable_usuario);
-        finishAffinity();
+        finish();
     }
 
     @Override
@@ -115,16 +121,16 @@ public class GameActivity extends Activity {
             handler_suaVez.removeCallbacks(runnable_suaVez);
         if(runnable_usuario != null)
             handler_usuario.removeCallbacks(runnable_usuario);
-        finishAffinity(); //Método para matar a activity e não deixa-lá indexada na pilhagem
+        finish(); //Método para matar a activity e não deixa-lá indexada na pilhagem
         return;
     }
 
 
     private void playGame() throws IOException {
         //Lê sequência do arquivo
-        if(ModoActivity.modogenius==1){
+        if(modoGenius==1){
             inputStream = assetManager.open("music.txt");
-        }else if (ModoActivity.modogenius==2){
+        }else if (modoGenius==2){
             inputStream = assetManager.open("music2.txt");
         }
 
@@ -150,8 +156,8 @@ public class GameActivity extends Activity {
             }
         }
 
-            counter = 0;
-        advanceGameCounter = 0;
+        counter = 0;
+        advanceGameCounter = 1;
         //Vamos Lá!
 
         handler_vamos_la = new Handler();
@@ -244,6 +250,7 @@ public class GameActivity extends Activity {
                                         //Usuário errou
                                         intent = new Intent(GameActivity.this, DerrotaActivity.class);
                                         intent.putExtra("PONTOS", String.valueOf(pontos));
+                                        intent.putExtra("MODO", String.valueOf(modoGenius));
                                         startActivity(intent);
                                         finish();
                                     }

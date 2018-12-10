@@ -163,12 +163,12 @@ public class TutorialActivity extends Activity {
 
     public void onBackButton(View view){
         startActivity(new Intent(this, MainActivity.class));  //O efeito ao ser pressionado do botão (no caso abre a activity)
-        finishAffinity();
+        finish();
     }
     @Override
     public void onBackPressed(){ //Botão BACK padrão do android
         startActivity(new Intent(this, MainActivity.class)); //O efeito ao ser pressionado do botão (no caso abre a activity)
-        finishAffinity(); //Método para matar a activity e não deixa-lá indexada na pilhagem
+        finish(); //Método para matar a activity e não deixa-lá indexada na pilhagem
         return;
 
     }

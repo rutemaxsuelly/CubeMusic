@@ -24,6 +24,7 @@ public class DerrotaActivity extends Activity {
     private SharedPreferences myScore;
     private SharedPreferences.Editor editor;
     private SharedPreferences myScoreg;
+    private int modoGenius;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,8 @@ public class DerrotaActivity extends Activity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_derrota_);
         String pontos= getIntent().getStringExtra("PONTOS");
+        String modo= getIntent().getStringExtra("MODO");
+        modoGenius = Integer.parseInt(modo);
         Typeface font = Typeface.createFromAsset(getAssets(), "impact.ttf");
         msg = (TextView) findViewById(R.id.textView10);
         msg.setTypeface(font);
@@ -71,6 +74,7 @@ public class DerrotaActivity extends Activity {
     }
     public void backerrou(View view){
         Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra("MODO", String.valueOf(modoGenius));
         startActivity(intent);
         finish();
     }
@@ -102,9 +106,6 @@ public class DerrotaActivity extends Activity {
 
             editor.putInt(nPlayer[c], rPlayer[c]);
             editor.commit();
-
-
-
 
         }else if(value > rPlayer[c]){
 
