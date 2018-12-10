@@ -230,7 +230,7 @@ public class GameActivity extends Activity {
                                         //Usuário acertou tudo
                                         pontos+=30;
                                         intent = new Intent(GameActivity.this, VitoriaActivity.class);
-                                        intent.putExtra("PONTOS", String.valueOf(pontos) + " Pontos");
+                                        intent.putExtra("PONTOS", String.valueOf(pontos));
                                         startActivity(intent);
                                         finish();
 
@@ -243,7 +243,7 @@ public class GameActivity extends Activity {
                                     }else{
                                         //Usuário errou
                                         intent = new Intent(GameActivity.this, DerrotaActivity.class);
-                                        intent.putExtra("PONTOS", String.valueOf(pontos) + " Pontos");
+                                        intent.putExtra("PONTOS", String.valueOf(pontos));
                                         startActivity(intent);
                                         finish();
                                     }

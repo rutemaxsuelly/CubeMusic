@@ -109,6 +109,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <ListView
+        android:id="@+id/lvRecordes"
         android:layout_width="123dp"
         android:layout_height="401dp"
         android:layout_marginStart="200dp"

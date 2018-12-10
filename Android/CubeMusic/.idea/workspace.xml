@@ -86,8 +86,8 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GameActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/cubemusic/GameActivity.java">
+      <file leaf-file-name="RecordesActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/cubemusic/RecordesActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-1020">
               <caret line="249" column="33" selection-start-line="249" selection-start-column="33" selection-end-line="249" selection-end-column="33" />
@@ -2377,6 +2377,10 @@
         <option value="$PROJECT_DIR$/Application/src/main/java/com/example/android/cubemusic/GameActivity.java" />
         <option value="$PROJECT_DIR$/Application/src/main/assets/music2.txt" />
         <option value="$PROJECT_DIR$/Application/src/main/java/com/example/android/cubemusic/TutorialActivity.java" />
+        <option value="$PROJECT_DIR$/Application/src/main/res/layout/activity_recordes.xml" />
+        <option value="$PROJECT_DIR$/Application/src/main/java/com/example/android/cubemusic/RecordesActivity.java" />
+        <option value="$PROJECT_DIR$/Application/src/main/java/com/example/android/cubemusic/GameActivity.java" />
+        <option value="$PROJECT_DIR$/Application/src/main/java/com/example/android/cubemusic/DerrotaActivity.java" />
       </list>
     </option>
   </component>
@@ -2694,7 +2698,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="10" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Application/src/main/java/com/example/android/cubemusic/DerrotaActivity.java</url>
+          <line>45</line>
+          <properties />
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="18" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -3123,6 +3135,58 @@
             <element signature="e#12909#13109#0" expanded="true" />
             <element signature="e#13108#13109#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/src/main/res/layout/activity_recordes.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-27/android/os/Looper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="134" selection-start-line="134" selection-end-line="134" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-27/android/os/Handler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="101" selection-start-line="101" selection-end-line="101" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/cubemusic/RecordesActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="87" column="20" selection-start-line="87" selection-start-column="20" selection-end-line="87" selection-end-column="20" />
+          <folding>
+            <element signature="e#1850#1873#0" expanded="true" />
+            <element signature="e#1995#2017#0" expanded="true" />
+            <element signature="e#2139#2162#0" expanded="true" />
+            <element signature="e#2284#2305#0" expanded="true" />
+            <element signature="e#2427#2448#0" expanded="true" />
+            <element signature="e#2570#2590#0" expanded="true" />
+            <element signature="e#3306#3314#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/cubemusic/GameActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="231" column="87" selection-start-line="231" selection-start-column="81" selection-end-line="231" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/src/main/java/com/example/android/cubemusic/DerrotaActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="84" column="20" lean-forward="true" selection-start-line="84" selection-start-column="20" selection-end-line="84" selection-end-column="20" />
         </state>
       </provider>
     </entry>
